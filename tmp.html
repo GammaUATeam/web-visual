@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Координати туриста</title>
+
+    <link rel="shortcut icon" href="img/tourist_icon.png" type="image/x-icon">
+
+</head>
+
+<body>
+
+    <div id="portConnectScreen">
+        <h1>Натисніть, щоб обрати пристрій</h1>
+    </div>
+
+    <script>
+        document.getElementById("portConnectScreen").addEventListener("click", async () => {
+
+            const port = await navigator.serial.requestPort();
+            await port.open({ baudRate: 9600 });
+
+            document.getElementById("portConnectScreen").style = "top: 100%;";
+
+            console.log("Port connected");
+            const reader = port.readable.getReader();
+
+            var lastValue;
+
+            while (true) {
+                const { value, done } = await reader.read();
+                if (done) {
+                    reader.releaseLock();
+                    break;
+                }
+
+                const decoder = new TextDecoder();
+                const decodedValue = decoder.decode(value);
+
+                function isValidData(hum) {
+                    return hum.length == 7;
+                }
+
+                var outputData;
+
+                if (isValidData(decodedValue)) {
+                    outputData = decodedValue
+                }
+                else {
+                    twoPacksString = lastValue + decodedValue;
+
+                    if (isValidData(twoPacksString)) {
+                        outputData = twoPacksString
+                    }
+                    else {
+                        console.log(`Ignored data: ${twoPacksString}`)
+                    }
+                }
+
+                lastValue = decodedValue;
+
+                console.log(outputData)
+            }
+
+        })
+
+    </script>
+
+</body>
+
+</html>
