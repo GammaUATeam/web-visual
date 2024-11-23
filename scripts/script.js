@@ -16,12 +16,12 @@ L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png").addTo(map);
 map.setView([49.834956, 24.014456], 14);
 
 var touristCurIcon = L.icon({
-    iconUrl: "../img/marker.svg",
+    iconUrl: "https://gammauateam.github.io/web-visual/img/marker.svg",
     iconSize: [25, 25],
     iconAnchor: [12.5, 12.5],
 });
 var touristOldIcon = L.icon({
-    iconUrl: "../img/marker.svg",
+    iconUrl: "https://gammauateam.github.io/web-visual/img/marker.svg",
     iconSize: [15, 15],
     iconAnchor: [7.5, 7.5],
 });
