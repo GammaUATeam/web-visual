@@ -76,7 +76,7 @@ function connectDevice() {
                 var twoCOMPortPacks = lastCOMPortValue + decodedValue;
                 x = twoCOMPortPacks.slice(0, 9);
                 y = twoCOMPortPacks.slice(10, 19);
-                SOS = decodedValue.slice(19, 20);
+                SOS = twoCOMPortPacks.slice(19, 20);
 
                 if (checkCoordinates(x, y) && decodedValue != "\n") {
                     console.log(`Joined packs ${lastCOMPortValue} + ${decodedValue}`);
