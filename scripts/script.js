@@ -54,7 +54,7 @@ function connectDevice() {
 
             var x = decodedValue.slice(0, 9);
             var y = decodedValue.slice(10, 19);
-            var SOS = decodedValue.slice(20, 20);
+            var SOS = decodedValue.slice(19, 20);
 
 
             var currentTime = getCurrentTime();
@@ -71,15 +71,16 @@ function connectDevice() {
             }
 
             if (checkCoordinates(x, y)) {
-                drawNewPoint(x, y, currentTime);
+                drawNewPoint(x, y, currentTime, SOS);
             } else {
                 var twoCOMPortPacks = lastCOMPortValue + decodedValue;
                 x = twoCOMPortPacks.slice(0, 9);
                 y = twoCOMPortPacks.slice(10, 19);
+                SOS = decodedValue.slice(19, 20);
 
                 if (checkCoordinates(x, y) && decodedValue != "\n") {
                     console.log(`Joined packs ${lastCOMPortValue} + ${decodedValue}`);
-                    drawNewPoint(x, y, currentTime);
+                    drawNewPoint(x, y, currentTime, SOS);
                 } else {
                     console.log(`Ignored data: ${decodedValue}`);
                 }
@@ -112,8 +113,8 @@ function callSOS() {
     document.getElementById("alerts").prepend(alertElem);
 }
 
-function drawNewPoint(x, y, currentTime) {
-    console.log(`%c${currentTime} ${x}; ${y}`, 'background: #900000; color: #fff');
+function drawNewPoint(x, y, currentTime, SOS) {
+    console.log(`%c${currentTime} ${x}; ${y} - ${SOS}`, 'background: #900000; color: #fff');
 
     var coordElem = document.createElement("p");
     coordElem.innerHTML = currentTime;
