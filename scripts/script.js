@@ -54,7 +54,7 @@ function connectDevice() {
 
             var x = decodedValue.slice(0, 9);
             var y = decodedValue.slice(10, 19);
-            var SOS = decodedValue.slice(20, 21);
+            var SOS = decodedValue.slice(20, 20);
 
 
             var currentTime = getCurrentTime();
