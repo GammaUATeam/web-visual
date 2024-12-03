@@ -54,7 +54,7 @@ function connectDevice() {
 
             var x = decodedValue.slice(0, 9);
             var y = decodedValue.slice(10, 19);
-            var SOS = decodedValue.slice(19, 20);
+            var SOS = decodedValue.slice(20, 21);
 
 
             var currentTime = getCurrentTime();
@@ -76,7 +76,7 @@ function connectDevice() {
                 var twoCOMPortPacks = lastCOMPortValue + decodedValue;
                 x = twoCOMPortPacks.slice(0, 9);
                 y = twoCOMPortPacks.slice(10, 19);
-                SOS = twoCOMPortPacks.slice(19, 20);
+                SOS = twoCOMPortPacks.slice(20, 21);
 
                 if (checkCoordinates(x, y) && decodedValue != "\n") {
                     console.log(`Joined packs ${lastCOMPortValue} + ${decodedValue}`);
